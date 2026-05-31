@@ -124,6 +124,18 @@ export const invitation = pgTable("invitation", {
     .references(() => user.id, { onDelete: "cascade" }),
 });
 
+export const secureUser = pgTable("secure_user", {
+  id: text("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  salt: text("salt").notNull(),
+  createdAt: timestamp("created_at")
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
+export type SecureUser = typeof secureUser.$inferSelect;
+
 export const schema = {
   user,
   session,
@@ -132,6 +144,7 @@ export const schema = {
   organization,
   member,
   invitation,
+  secureUser,
   organizationRelations,
   memberRelations,
 };

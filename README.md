@@ -1,10 +1,10 @@
-# Better Auth Starter
+# Secure Registration and Login System
 
 ![ChatGPT Image Jun 9, 2025, 07_09_10 PM](https://github.com/user-attachments/assets/660133ca-5463-4c77-9ece-37280caa229c)
 
 ## Overview
 
-The Better Auth Starter is simple starter pack using Next.js, Better Auth, Shadcn, Drizzle, and Neon
+Cybersecurity final project for a secure registration and login system. It demonstrates password strength validation, hashing, salt, and pepper using Next.js, Drizzle, and Neon Postgres.
 
 ## Getting Started
 
@@ -18,21 +18,44 @@ pnpm i
 
 ### Configuration
 
-Create a copy of the provided `env.example` file and name it `.env`. Fill in the required OpenAI API Key in the newly created `.env` file, and Better Auth variables if you're going to use authentication:
+Create a copy of the provided `env.example` file and name it `.env`. Use database credentials from a database account that you own:
 
 `cp env.example .env`
 
 ```bash
 BETTER_AUTH_SECRET="your-better-auth-secret"
 BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+PASSWORD_PEPPER="your-secret-password-pepper-do-not-store-in-db"
 
-DATABASE_URL="your-database-url"
+DATABASE_URL="postgresql://USER:PASSWORD@HOST/DB?sslmode=require"
 
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
 ```
 
-Make sure to replace placeholder values with your actual API keys, and keep them safe!
+For a school project, the easiest owned database setup is to create your own Neon Postgres project, copy its connection string, and paste it into `DATABASE_URL` in `.env`. Then create the tables with:
+
+```bash
+pnpm db:push
+```
+
+Make sure to replace placeholder values with your actual keys, and keep `.env` private.
+
+## Cybersecurity Features
+
+- Registration module with username, password, and confirm password
+- Login module with username and password
+- Password strength meter with Weak, Medium, and Strong states
+- Minimum 12-character password requirement
+- Uppercase, lowercase, digit, and symbol validation
+- Unique random salt per user
+- Environment-only pepper
+- PBKDF2-SHA256 password hashing
+- Database stores `username`, `password_hash`, and `salt`
+- Plain text passwords are not stored
+
+The assignment documentation draft is in `documentation.md`.
 
 # Development Server
 

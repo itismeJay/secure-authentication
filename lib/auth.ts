@@ -11,7 +11,7 @@ import { schema } from "@/db/schema";
 import { getActiveOrganization } from "@/server/organizations";
 import { admin, member, owner } from "./auth/permissions";
 
-const resend = new Resend(process.env.RESEND_API_KEY as string);
+const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder");
 
 export const auth = betterAuth({
   emailVerification: {
