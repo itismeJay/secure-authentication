@@ -2,9 +2,33 @@
 
 ![ChatGPT Image Jun 9, 2025, 07_09_10 PM](https://github.com/user-attachments/assets/660133ca-5463-4c77-9ece-37280caa229c)
 
+
 ## Overview
 
 Cybersecurity final project for a secure registration and login system. It demonstrates password strength validation, hashing, salt, and pepper using Next.js, Drizzle, and Neon Postgres.
+
+
+Short Documentation
+1. Hashing Algorithm Used
+The system uses PBKDF2 with SHA-256 to hash passwords. The password is not stored as plain text. Instead, the system generates a secure hash before saving it to the database.
+
+2. How Salt Works
+A unique random salt is generated for every registered user. The salt is combined with the password before hashing. This makes identical passwords produce different hashes in the database.
+
+3. How Pepper Works
+A pepper is a secret value stored in the environment variables. It is combined with the password and salt before hashing, but it is not stored in the database. This adds extra protection if the database is exposed.
+
+4. Password Meter Validation
+The password meter checks if the password has at least one lowercase letter, one uppercase letter, one number, one symbol, and a minimum of 12 characters. It displays the password strength as Weak, Medium, or Strong.
+
+5. Why Strong Passwords Are Important
+Strong passwords help protect accounts from guessing, brute-force attacks, and dictionary attacks. Longer and more complex passwords are harder for attackers to crack.
+
+6. Screenshot of Hosted System
+Insert screenshot of the hosted registration/login system here.
+
+7. Public URL
+Hosted website link: [Insert public URL here]
 
 ## Getting Started
 
@@ -66,3 +90,7 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+
+
